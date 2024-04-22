@@ -42,7 +42,7 @@ for option in options:
     chrome_options.add_argument(option)
 
 service = Service(executable_path="chromedriver.exe")
-driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
+driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
 
 
 sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFlGfAH9mUXWHp-MCXhS3hcHAaSmGN4ERo80osEgYP9crJGBLtSoOVOEqvUYRACc6mfqXXGHjMl0gV/pubhtml"

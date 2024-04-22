@@ -40,7 +40,6 @@ options = [
 for option in options:
     chrome_options.add_argument(option)
 
-
 driver = webdriver.Chrome(options = chrome_options)
 
 sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFlGfAH9mUXWHp-MCXhS3hcHAaSmGN4ERo80osEgYP9crJGBLtSoOVOEqvUYRACc6mfqXXGHjMl0gV/pubhtml"
@@ -251,8 +250,7 @@ def booking_the_participants():
             )
 
     final_book_button = driver.find_element(By.XPATH, "//button[normalize-space()='Prenota']")
-    print(final_book_button.get_attribute('class'))
-    #final_book_button.click()
+    final_book_button.click()
 
 driver.get(sheet_link)
 
@@ -268,7 +266,7 @@ book_hour = find_following_td_text(driver, max_th_id, book_date)
 
 int_login(driver, R_username, R_password)
 
-#loop_till_12()
+loop_till_12()
 
 booking_the_hour()
 

@@ -197,7 +197,7 @@ def int_login(driver, username, password):
 def loop_till_12():
     while True:
         current_time = datetime.now(rome_tz).strftime('%H:%M')
-        if current_time == '21:07':
+        if current_time == '21:11':
             break
         time.sleep(2)
 

@@ -265,7 +265,7 @@ def booking_the_participants():
     final_book_button = driver.find_element(By.XPATH, "//button[normalize-space()='Prenota']")
     print(final_book_button.get_attribute('class'))
     with open('./GitHub_Action_Results.txt', 'w') as f:
-    f.write(f"This was written with a GitHub action {driver.title}")
+      f.write(f"This was written with a GitHub action {driver.title}")
     #final_book_button.click()
 
 driver.get(sheet_link)

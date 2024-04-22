@@ -274,7 +274,7 @@ booking_the_hour()
 
 booking_the_participants()
 
-print(book_hour)
+print(f"The booked hour for {book_day} is {book_hour}")
 with open('./GitHub_Action_Results.txt', 'w') as f:
     f.write(f"The booked hour for {book_day} is {book_hour}")
 

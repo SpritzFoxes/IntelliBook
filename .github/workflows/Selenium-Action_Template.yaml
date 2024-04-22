@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '56 11 * * *'
+    - cron: '56 21 * * *'
     - cron: '*/15 * * * *'
 jobs:
   scrape:

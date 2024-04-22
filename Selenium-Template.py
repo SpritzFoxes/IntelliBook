@@ -20,13 +20,13 @@ display.start()
 chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
                                       # and if it doesn't exist, download it automatically,
                                       # then add chromedriver to path
+
 chrome_options = webdriver.ChromeOptions()    
 # Add your options as needed    
 options = [
   # Define window size here
-  "--headless"
-  "--window-size=1200,1200",
-  "--ignore-certificate-errors"
+   "--window-size=1200,1200",
+    "--ignore-certificate-errors"
  
     #"--headless",
     #"--disable-gpu",
@@ -41,8 +41,8 @@ options = [
 for option in options:
     chrome_options.add_argument(option)
 
-service = Service(executable_path="chromedriver.exe")
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+    
+driver = webdriver.Chrome(options = chrome_options)
 
 
 sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFlGfAH9mUXWHp-MCXhS3hcHAaSmGN4ERo80osEgYP9crJGBLtSoOVOEqvUYRACc6mfqXXGHjMl0gV/pubhtml"

@@ -197,7 +197,7 @@ def int_login(driver, username, password):
 def loop_till_12():
     while True:
         current_time = datetime.now(rome_tz).strftime('%H:%M')
-        if current_time == '21:11':
+        if current_time == '11:56':
             break
         time.sleep(2)
 
@@ -270,7 +270,7 @@ book_hour = find_following_td_text(driver, max_th_id, current_date)
 
 int_login(driver, R_username, R_passsword)
 
-loop_till_12()
+#loop_till_12()
 
 booking_the_hour()
 

@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 import re
 import sys
@@ -45,35 +45,33 @@ driver = webdriver.Chrome(options = chrome_options)
 
 sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFlGfAH9mUXWHp-MCXhS3hcHAaSmGN4ERo80osEgYP9crJGBLtSoOVOEqvUYRACc6mfqXXGHjMl0gV/pubhtml"
 
-#date time in gg/mm/yy format
-#current_date = datetime.now().strftime("%x")
-current_date = "24/04/24"
-
 rome_tz = pytz.timezone('Europe/Rome')
-current_time = datetime.now(rome_tz).strftime('%H:%M')
+current_time = datetime.now(rome_tz)
+current_time_str = datetime.now(rome_tz).strftime('%H:%M')
+
+book_date = (current_time + timedelta(days=2)).strftime("%d/%m/%y")
 
 # Convert to "yyyy-mm-dd" format
-book_day = datetime.strptime(current_date, "%d/%m/%y").strftime("%Y-%m-%d")
+book_date_mod = datetime.strptime(book_date, "%d/%m/%y").strftime("%Y-%m-%d")
+day_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins#/service/custom-1/74/" + book_date_mod
 
 participants_identifier = None
 
 R_username = "raffy.p15@gmail.com"
-R_passsword = "intelli15"
+R_password = "intelli15"
 
 book_hour = ""
 number_of_participants = ""
 participant_names = []
 
-day_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins#/service/custom-1/74/" + book_day
-
 #XPATH with f for formatting; * used to select items regardless of tags
 
-def get_max_th_id(driver, current_date):
+def get_max_th_id(driver, book_date):
     
-    WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f"//*[contains(text(), '{current_date}')]")))
+    WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, f"//*[contains(text(), '{book_date}')]")))
     
-    booked_date_td = driver.find_elements(By.XPATH, f"//*[contains(text(), '{current_date}') and not(following-sibling::td[text()='Yes'])]")
-    deleted_date_td = driver.find_elements(By.XPATH, f"//*[contains(text(), '{current_date}') and (following-sibling::td[text()='Yes'])]")
+    booked_date_td = driver.find_elements(By.XPATH, f"//*[contains(text(), '{book_date}') and not(following-sibling::td[text()='Yes'])]")
+    deleted_date_td = driver.find_elements(By.XPATH, f"//*[contains(text(), '{book_date}') and (following-sibling::td[text()='Yes'])]")
     matching_td_elements = []
     
     for deleted_element in deleted_date_td:
@@ -196,8 +194,8 @@ def int_login(driver, username, password):
 #loop for waiting 12:00
 def loop_till_12():
     while True:
-        current_time = datetime.now(rome_tz).strftime('%H:%M')
-        if current_time == '11:56':
+        current_time_str = datetime.now().strftime('%H:%M')
+        if current_time_str == '12:00':
             break
         time.sleep(2)
 
@@ -258,7 +256,7 @@ def booking_the_participants():
 
 driver.get(sheet_link)
 
-max_th_id = get_max_th_id(driver, current_date)
+max_th_id = get_max_th_id(driver, book_date)
 
 participants_identifier = check_participants(driver, max_th_id)
 
@@ -266,9 +264,9 @@ participant_names = choose_participant()
 
 number_of_participants = choose_participant_number()
 
-book_hour = find_following_td_text(driver, max_th_id, current_date)
+book_hour = find_following_td_text(driver, max_th_id, book_date)
 
-int_login(driver, R_username, R_passsword)
+int_login(driver, R_username, R_password)
 
 #loop_till_12()
 

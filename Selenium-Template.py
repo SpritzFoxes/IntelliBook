@@ -11,25 +11,21 @@ import time
 from datetime import datetime
 import re
 import sys
-
-
-"""
 from pyvirtualdisplay import Display
+
 display = Display(visible=0, size=(800, 800))  
 display.start()
-"""
 
 chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
                                       # and if it doesn't exist, download it automatically,
                                       # then add chromedriver to path
-
-"""
 chrome_options = webdriver.ChromeOptions()    
 # Add your options as needed    
 options = [
   # Define window size here
-   "--window-size=1200,1200",
-    "--ignore-certificate-errors"
+  "--headless"
+  "--window-size=1200,1200",
+  "--ignore-certificate-errors"
  
     #"--headless",
     #"--disable-gpu",
@@ -44,15 +40,9 @@ options = [
 for option in options:
     chrome_options.add_argument(option)
 
-    
-driver = webdriver.Chrome(options = chrome_options)
-"""
-
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-
 service = Service(executable_path="chromedriver.exe")
 driver = webdriver.Chrome(service=service, options=chrome_options)
+
 
 sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFlGfAH9mUXWHp-MCXhS3hcHAaSmGN4ERo80osEgYP9crJGBLtSoOVOEqvUYRACc6mfqXXGHjMl0gV/pubhtml"
 

@@ -47,6 +47,7 @@ sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFlGfAH9mUXWHp-MC
 #date time in gg/mm/yy format
 #current_date = datetime.now().strftime("%x")
 current_date = "24/04/24"
+current_time = datetime.now().strftime('%H:%M')
 
 # Convert to "yyyy-mm-dd" format
 book_day = datetime.strptime(current_date, "%d/%m/%y").strftime("%Y-%m-%d")
@@ -266,7 +267,7 @@ book_hour = find_following_td_text(driver, max_th_id, current_date)
 
 int_login(driver, R_username, R_passsword)
 
-loop_till_12()
+#loop_till_12()
 
 booking_the_hour()
 

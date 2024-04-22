@@ -15,7 +15,9 @@ jobs:
         run: apt list --installed    
       - name: Removing previous chrome instances on runner 
         run: sudo apt purge google-chrome-stable 
-
+      
+      - name: Upgrading pip
+        run: pip install --upgrade pip
       - name: Installing pytz
         run: pip install pytz
         

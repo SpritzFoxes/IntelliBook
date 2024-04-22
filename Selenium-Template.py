@@ -189,15 +189,13 @@ def int_login(driver, username, password):
 
     driver.get(day_link)
 
-"""
 #loop for waiting 12:00
 def loop_till_12():
     while True:
         current_time = datetime.now().strftime('%H:%M')
-        if current_time == '12:00':
+        if current_time == '20:42':
             break
         time.sleep(2)
-"""
 
 def booking_the_hour():
 
@@ -268,7 +266,7 @@ book_hour = find_following_td_text(driver, max_th_id, current_date)
 
 int_login(driver, R_username, R_passsword)
 
-#loop_till_12()
+loop_till_12()
 
 booking_the_hour()
 

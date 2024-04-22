@@ -3,9 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     # This will run at 9:30 AM UTC (10:30 AM Rome Standard Time) and 10:30 AM UTC (11:30 AM Rome Daylight Saving Time)
-    #- cron:  '30 9,10 * * *'
-    - cron:  '0 23,0 * * *'
-    
+    - cron:  '30 9,10 * * *'
     
 jobs:
   scrape:
@@ -33,20 +31,22 @@ jobs:
       - name: Install xvfb
         run: sudo apt-get install xvfb
 
-      - name: Check if current time is within an hour of 1 AM in Rome
+      - name: Check if current time is within an hour of 11:30 AM in Rome
+        id: time_check
         run: |
           current_time_in_rome=$(TZ=Europe/Rome date +'%-H:%M')
           current_hour_in_rome=${current_time_in_rome%:*}
           current_minute_in_rome=${current_time_in_rome#*:}
-          if [[ "$current_hour_in_rome" == "1" && "$current_minute_in_rome" -ge 0 ]] || [[ "$current_hour_in_rome" == "2" && "$current_minute_in_rome" -le 0 ]]; then
-            echo "It's within an hour of 1 AM in Rome. Running the job..."
-            # Put the commands of your job here
-            - name: Running the Python script
-              run: python Selenium-Template.py
+          if [[ "$current_hour_in_rome" == "11" && "$current_minute_in_rome" -ge 30 ]] || [[ "$current_hour_in_rome" == "12" && "$current_minute_in_rome" -le 30 ]]; then
+            echo "It's within an hour of 11:30 AM in Rome. Running the job..."
+            echo "::set-output name=run_job::true"
           else
-            echo "It's not within an hour of 1 AM in Rome. Exiting the job."
-            exit 1
+            echo "It's not within an hour of 11:30 AM in Rome. Exiting the job."
+            echo "::set-output name=run_job::false"
           fi
+      - name: Running the Python script
+        if: steps.time_check.outputs.run_job == 'true'
+        run: python Selenium-Template.py
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |

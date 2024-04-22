@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 import time
 from datetime import datetime
+import pytz
 import re
 import sys
 import chromedriver_autoinstaller
@@ -47,7 +48,9 @@ sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFlGfAH9mUXWHp-MC
 #date time in gg/mm/yy format
 #current_date = datetime.now().strftime("%x")
 current_date = "24/04/24"
-current_time = datetime.now().strftime('%H:%M')
+
+rome_tz = pytz.timezone('Europe/Rome')
+current_time = datetime.now(rome_tz).strftime('%H:%M')
 
 # Convert to "yyyy-mm-dd" format
 book_day = datetime.strptime(current_date, "%d/%m/%y").strftime("%Y-%m-%d")

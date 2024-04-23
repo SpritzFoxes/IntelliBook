@@ -71,21 +71,32 @@ def get_max_th_id(driver, book_date):
     
     booked_date_td = driver.find_elements(By.XPATH, f"//*[contains(text(), '{book_date}') and not(following-sibling::td[text()='Yes'])]")
     deleted_date_td = driver.find_elements(By.XPATH, f"//*[contains(text(), '{book_date}') and (following-sibling::td[text()='Yes'])]")
-    matching_td_elements = []
-    
+        matching_td_elements = []
+
+    #sto casino per evitare che elimini anche gli altri se ne crei più di uno con lo stesso nome e poi lo elimini
+    deleted_elements_counter = {}
+    matched_elements_counter = {}
+    max_deleted_th_id = {}
+
     for deleted_element in deleted_date_td:
         deleted_hour = deleted_element.find_element(By.XPATH, "./following-sibling::td").text
         deleted_participant = deleted_element.find_element(By.XPATH, "./following-sibling::td/following-sibling::td").text
         deleted_th_id = int(deleted_element.find_element(By.XPATH, "./preceding-sibling::th").get_attribute('id').split('R')[1])
 
-        for booked_element in booked_date_td:
-            booked_hour = booked_element.find_element(By.XPATH, "./following-sibling::td").text
-            booked_participant = booked_element.find_element(By.XPATH, "./following-sibling::td/following-sibling::td").text
+        deleted_key = (deleted_hour, deleted_participant)
+        deleted_elements_counter[deleted_key] = deleted_elements_counter.get(deleted_key, 0) + 1
+        max_deleted_th_id[deleted_key] = max(max_deleted_th_id.get(deleted_key, 0), deleted_th_id)
 
-            booked_th_id = int(booked_element.find_element(By.XPATH, "./preceding-sibling::th").get_attribute('id').split('R')[1])
+    for booked_element in booked_date_td:
+        booked_hour = booked_element.find_element(By.XPATH, "./following-sibling::td").text
+        booked_participant = booked_element.find_element(By.XPATH, "./following-sibling::td/following-sibling::td").text
+        booked_th_id = int(booked_element.find_element(By.XPATH, "./preceding-sibling::th").get_attribute('id').split('R')[1])
 
-        if booked_hour == deleted_hour and booked_participant == deleted_participant and booked_th_id < deleted_th_id:
-            matching_td_elements.append(booked_element)
+        booked_key = (booked_hour, booked_participant)
+        if booked_key in deleted_elements_counter and booked_th_id < max_deleted_th_id[booked_key]:
+            matched_elements_counter[booked_key] = matched_elements_counter.get(booked_key, 0) + 1
+            if matched_elements_counter[booked_key] <= deleted_elements_counter[booked_key]:
+                matching_td_elements.append(booked_element)
 
     booked_date_td = [element for element in booked_date_td if element not in matching_td_elements]
 

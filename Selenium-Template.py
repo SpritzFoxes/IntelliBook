@@ -42,7 +42,7 @@ for option in options:
 
 driver = webdriver.Chrome(options = chrome_options)
 
-sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFlGfAH9mUXWHp-MCXhS3hcHAaSmGN4ERo80osEgYP9crJGBLtSoOVOEqvUYRACc6mfqXXGHjMl0gV/pubhtml"
+sheet_link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSz1AragfJ7QGuUXyNr5SXxSvwJhWXE2mGQuv9uTpc9sWVKXF0NdF0RHVxLt0bolGZZmsE7mchc90xv/pubhtml"
 
 rome_tz = pytz.timezone('Europe/Rome')
 current_time = datetime.now(rome_tz)

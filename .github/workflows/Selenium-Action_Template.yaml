@@ -39,13 +39,13 @@ jobs:
           current_minute_in_rome=${current_time_in_rome#*:}
           if [[ "$current_hour_in_rome" == "11" && "$current_minute_in_rome" -ge 30 ]] || [[ "$current_hour_in_rome" == "12" && "$current_minute_in_rome" -le 30 ]]; then
             echo "It's within an hour of 11:30 AM in Rome. Running the job..."
-            echo "::set-output name=run_job::true"
+            echo "run_job=true" >> $GITHUB_ENV
           else
             echo "It's not within an hour of 11:30 AM in Rome. Exiting the job."
-            echo "::set-output name=run_job::false"
+            echo "run_job=false" >> $GITHUB_ENV
           fi
       - name: Running the Python script
-        if: steps.time_check.outputs.run_job == 'true'
+        if: env.run_job == 'true'
         run: python Selenium-Template.py
         
       - name: Commit and Push The Results From Python Selenium Action

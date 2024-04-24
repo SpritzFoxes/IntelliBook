@@ -277,7 +277,7 @@ book_hour = find_following_td_text(driver, max_th_id, book_date)
 
 int_login(driver, R_username, R_password)
 
-#loop_till_12()
+loop_till_12()
 
 booking_the_hour()
 

@@ -71,7 +71,7 @@ def get_max_th_id(driver, book_date):
     
     booked_date_td = driver.find_elements(By.XPATH, f"//*[contains(text(), '{book_date}') and not(following-sibling::td[text()='Yes'])]")
     deleted_date_td = driver.find_elements(By.XPATH, f"//*[contains(text(), '{book_date}') and (following-sibling::td[text()='Yes'])]")
-        matching_td_elements = []
+    matching_td_elements = []
 
     #sto casino per evitare che elimini anche gli altri se ne crei più di uno con lo stesso nome e poi lo elimini
     deleted_elements_counter = {}
@@ -277,7 +277,7 @@ book_hour = find_following_td_text(driver, max_th_id, book_date)
 
 int_login(driver, R_username, R_password)
 
-loop_till_12()
+#loop_till_12()
 
 booking_the_hour()
 

@@ -283,9 +283,11 @@ booking_the_hour()
 
 booking_the_participants()
 
-print(f"The booked hour for {book_date} is {book_hour} at {current_time_str}")
+end_script_time_str = datetime.now(rome_tz).strftime('%H:%M:%S')
+
+print(f"Booked for {book_date} at {book_hour}; script starting at {current_time_str} and finishing at {end_script_time_str}")
 with open('./GitHub_Action_Results.txt', 'w') as f:
-    f.write(f"The booked hour for {book_date} is {book_hour} at {current_time_str}")
+    f.write(f"Booked for {book_date} at {book_hour}; script starting at {current_time_str} and finishing at {end_script_time_str}")
 
 time.sleep(10)
 

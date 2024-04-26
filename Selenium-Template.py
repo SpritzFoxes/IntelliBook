@@ -129,7 +129,7 @@ def check_participants(driver, max_th_id):
 
     participants_identifier = None
     for td in td_elements:
-        if "R + V" in td.text:
+        if "R + V" in td.text or "V + R" in td.text:
             participants_identifier = 3
             break
         elif "V" in td.text:

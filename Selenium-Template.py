@@ -207,7 +207,7 @@ def loop_till_12():
         current_time_str = datetime.now(rome_tz).strftime('%H:%M')
         if current_time_str == '12:00':
             break
-        time.sleep(2)
+        time.sleep(1)
 
 def booking_the_hour():
 

@@ -52,7 +52,7 @@ book_date = (current_time + timedelta(days=2)).strftime("%d/%m/%y")
 
 # Convert to "yyyy-mm-dd" format
 book_date_mod = datetime.strptime(book_date, "%d/%m/%y").strftime("%Y-%m-%d")
-day_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins#/service/custom-1/74/" + book_date_mod
+day_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins/service/custom-1/74/" + book_date_mod
 
 participants_identifier = None
 

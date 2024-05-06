@@ -279,7 +279,11 @@ int_login(driver, R_username, R_password)
 
 loop_till_12()
 
-booking_the_hour()
+#booking_the_hour()
+
+final_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins/service/custom-1/74/" + book_date_mod + "/" + book_hour + "/" + str(number_of_participants)
+
+driver.get(final_link)
 
 booking_the_participants()
 

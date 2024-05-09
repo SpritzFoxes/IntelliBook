@@ -6,7 +6,7 @@ on:
     - cron:  '30 9,10 * * *'
     
 jobs:
-  scrape:
+  booking:
     runs-on: ubuntu-latest
     steps:
       - name: Checking out repo

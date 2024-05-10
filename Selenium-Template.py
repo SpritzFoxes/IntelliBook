@@ -136,6 +136,17 @@ def check_participants(driver, max_th_id):
             participants_identifier = 2
         elif "R" in td.text:
             participants_identifier = 1
+        elif "R + V + G" in td.text:
+            participants_identifier = 4
+        elif "R + V + C" in td.text:
+            participants_identifier = 5
+        elif "R + V + G + C" in td.text or "R + V + C + G" in td.text:
+            participants_identifier = 6
+        elif "R + V + G + C + N" in td.text or "R + V + C + G + N" in td.text or "R + V + G + N + C" in td.text or "R + V + N + G + C" in td.text:
+            participants_identifier = 7
+        elif "R + V + G + N" in td.text or "R + V + N + G" in td.text:
+            participants_identifier = 8
+        
 
     if participants_identifier is None:
         print("No participant found.")
@@ -167,6 +178,16 @@ def choose_participant():
         return ["Veronica Zani"]
     elif participants_identifier == 3:
         return ["Raffaele Papa", "Veronica Zani"]
+    elif participants_identifier == 4:
+        return ["Raffaele Papa", "Veronica Zani", "Giulia Tomei"]
+    elif participants_identifier == 5:
+        return ["Raffaele Papa", "Veronica Zani", "Chiara Lavitola"]
+    elif participants_identifier == 6:
+        return ["Raffaele Papa", "Veronica Zani", "Giulia Tomei", "Chiara Lavitola"]
+    elif participants_identifier == 7:
+        return ["Raffaele Papa", "Veronica Zani", "Giulia Tomei", "Chiara Lavitola", "Antonino Lamia"]
+    elif participants_identifier == 8:
+        return ["Raffaele Papa", "Veronica Zani", "Giulia Tomei", "Antonino Lamia"]
     print(participant_names)
 
 def choose_participant_number():
@@ -275,7 +296,8 @@ participants_identifier = check_participants(driver, max_th_id)
 
 participant_names = choose_participant()
 
-number_of_participants = choose_participant_number()
+#non serve più
+#number_of_participants = choose_participant_number()
 
 book_hour = find_following_td_text(driver, max_th_id, book_date)
 

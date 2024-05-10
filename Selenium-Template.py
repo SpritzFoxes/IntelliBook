@@ -209,6 +209,7 @@ def loop_till_12():
             break
         time.sleep(1)
 
+#non serve più basta creare il link
 def booking_the_hour():
 
     WebDriverWait(driver, 5).until(

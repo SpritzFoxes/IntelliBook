@@ -230,11 +230,14 @@ def booking_the_hour():
 
 def booking_the_participants():
 
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.TAG_NAME, "label"))
-    )
-
     for participant_name in participant_names:
+
+        driver.get(final_link)
+
+        WebDriverWait(driver, 5).until(
+                EC.presence_of_element_located((By.TAG_NAME, "label"))
+                )
+        
         # Find the div with the known text
         div = driver.find_element(By.XPATH, f"//div[text()='{participant_name}']")
 
@@ -249,20 +252,20 @@ def booking_the_participants():
 
         driver.execute_script("arguments[0].click();", label)
         
-    WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.XPATH, "//button[normalize-space()='Continua']"))
-            )
-
-    continue_button = driver.find_element(By.XPATH, "//button[normalize-space()='Continua']")
-    continue_button.click()
-
-    #prenotazione finale
-    WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.XPATH, "//button[normalize-space()='Prenota']"))
-            )
-
-    final_book_button = driver.find_element(By.XPATH, "//button[normalize-space()='Prenota']")
-    final_book_button.click()
+        WebDriverWait(driver, 5).until(
+                EC.presence_of_element_located((By.XPATH, "//button[normalize-space()='Continua']"))
+                )
+    
+        continue_button = driver.find_element(By.XPATH, "//button[normalize-space()='Continua']")
+        continue_button.click()
+    
+        #prenotazione finale
+        WebDriverWait(driver, 5).until(
+                EC.presence_of_element_located((By.XPATH, "//button[normalize-space()='Prenota']"))
+                )
+    
+        final_book_button = driver.find_element(By.XPATH, "//button[normalize-space()='Prenota']")
+        final_book_button.click()
 
 driver.get(sheet_link)
 
@@ -287,8 +290,6 @@ loop_till_12()
 #final_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins/service/custom-1/74/" + book_date_mod + "/" + book_hour + "/" + str(number_of_participants)
 
 final_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins/service/custom-1/74/" + book_date_mod + "/" + book_hour + "/" + "1"
-
-driver.get(final_link)
 
 booking_the_participants()
 

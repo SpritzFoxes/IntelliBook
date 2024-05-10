@@ -279,9 +279,13 @@ int_login(driver, R_username, R_password)
 
 loop_till_12()
 
+#non serve più
 #booking_the_hour()
 
-final_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins/service/custom-1/74/" + book_date_mod + "/" + book_hour + "/" + str(number_of_participants)
+#vecchio con prenotazione per 2 persone
+#final_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins/service/custom-1/74/" + book_date_mod + "/" + book_hour + "/" + str(number_of_participants)
+
+final_link = "https://gyms.vertical-life.info/it/intellighenzia-project-asd/checkins/service/custom-1/74/" + book_date_mod + "/" + book_hour + "/" + "1"
 
 driver.get(final_link)
 

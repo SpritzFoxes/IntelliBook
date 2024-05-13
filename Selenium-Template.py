@@ -253,6 +253,8 @@ def booking_the_participants():
 
     for participant_name in participant_names:
 
+        time.sleep(1)
+
         driver.get(final_link)
 
         WebDriverWait(driver, 5).until(
